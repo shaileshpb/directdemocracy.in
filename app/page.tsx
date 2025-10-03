@@ -37,7 +37,7 @@ export default function HomePage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-lg font-medium">Loading press releases...</p>
+        <p className="text-lg font-medium">Loading updates...</p>
       </div>
     );
   }
@@ -45,7 +45,7 @@ export default function HomePage() {
   return (
     <main className="max-w-3xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6 text-center">
-        PIB Press Releases
+        Government Updates for Citizens
       </h1>
 
       <div className="space-y-6 overflow-y-auto">
@@ -66,7 +66,13 @@ export default function HomePage() {
               {release.posted_on_raw}
               
             </p>
-            <p className="text-gray-800 line-clamp-4">{release.body_text}</p>
+            <p className="text-gray-800 line-clamp-4">
+              {(() => {
+                const text = release.body_text || "";
+                const idx = text.indexOf("PIB Delhi");
+                return idx !== -1 ? text.slice(idx + "PIB Delhi".length).trim() : text;
+              })()}
+            </p>
           </a>
         ))}
       </div>
