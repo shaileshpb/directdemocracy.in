@@ -9,7 +9,7 @@ export async function GET() {
 
     const releases = await collection
       .find({})
-      .sort({ date: -1 }) // latest first
+      .sort({ posted_on: -1 }) // latest first
       .limit(50)
       .toArray();
 
